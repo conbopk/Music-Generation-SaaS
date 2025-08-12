@@ -46,5 +46,104 @@ Follow these steps to install and set up the project
 
 **Clone the Repository**
 ```bash
+git clone https://github.com/conbopk/Music-Generation-SaaS.git
+```
 
+**Install Python**
+
+Download and install Python if not already installed. Use the link below for guidance on installation:
+[Python Download](https://www.python.org/downloads/)
+
+Create a virtual environment with **Python 3.12.**
+
+## Backend
+
+Navigate to backend folder:
+```bash
+cd backend
+```
+
+Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+Modal setup:
+```bash
+modal setup
+```
+
+Run on Modal:
+```bash
+modal run main.py
+```
+
+Deploy backend:
+```bash
+modal deploy main.py
+```
+
+## Frontend
+
+Install dependencies:
+```bash
+cd frontend
+npm i
+```
+
+Run:
+```bash
+npm run dev
+```
+
+## Queue
+
+Run the local queue development server with Inngest:
+```bash
+cd frontend
+npx inngest-cli@latest dev
+```
+
+## AWS Setup
+Policy for frontend user:
+```bash
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "VisualEditor0",
+			"Effect": "Allow",
+			"Action": [
+				"s3:GetObject",
+				"s3:ListBucket"
+			],
+			"Resource": [
+				"arn:aws:s3:::*/*",
+				"arn:aws:s3:::your-bucket-name"
+			]
+		}
+	]
+}
+```
+
+Policy for backend user:;
+```bash
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::*/*",
+                "arn:aws:s3:::your-bucket-name"
+            ]
+        }
+    ]
+}
 ```
